@@ -15,31 +15,23 @@
         <h1 class="cover-heading">Sheridan Currency.</h1>
         <p class="lead">
 
-          <form>
-          <p>
-          Amount: $<input type="number" id="amount"/>
-          </p>
+        <%= form_tag('/create', method: 'post') do %>
+          <%= label_tag(:amount, "Amount: $") %>
+          <%= text_field_tag(:amount) %>
 
           <p>
             <label>FROM: </label>
-              <select id="currency_from" >
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="SGD">SGD</option>
-              </select>
+            <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], "USD") %>
           </p>
           <p>
             <label>TO: </label>
-              <select id="currency_to">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="SGD">SGD</option>
-              </select>
+            <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], "EUR") %>
           </p>
-          <p class="lead">
-            <input type="submit" value="CONVERT" class="btn btn-lg btn-secondary" />
-          </p>
-          </form>
+
+
+          <%= submit_tag("Convert", class: "btn btn-lg btn-secondary") %>
+        <% end %>
+
           <br/>
           <label>OUTPUT: </label>
           <h1 className="output"></h1>
