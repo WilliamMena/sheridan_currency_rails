@@ -1,0 +1,56 @@
+<body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+          <h3 class="masthead-brand">Cover</h3>
+          <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="#">Home</a>
+            <a class="nav-link" href="#">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+        <h1 class="cover-heading">Sheridan Currency.</h1>
+        <p class="lead">
+
+          <form>
+          <p>
+          Amount: $<input type="number" id="amount"/>
+          </p>
+
+          <p>
+            <label>FROM: </label>
+              <select id="currency_from" >
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="SGD">SGD</option>
+              </select>
+          </p>
+          <p>
+            <label>TO: </label>
+              <select id="currency_to">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="SGD">SGD</option>
+              </select>
+          </p>
+          <p class="lead">
+            <input type="submit" value="CONVERT" class="btn btn-lg btn-secondary" />
+          </p>
+          </form>
+          <br/>
+          <label>OUTPUT: </label>
+          <h1 className="output"></h1>
+        </p>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div>
+      </footer>
+    </div>
+
+</body>
