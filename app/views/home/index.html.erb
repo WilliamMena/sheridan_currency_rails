@@ -3,7 +3,7 @@
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
-          <h3 class="masthead-brand">Cover</h3>
+          <h3 class="masthead-brand">Sheridan</h3>
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link active" href="#">Home</a>
             <a class="nav-link" href="#">Contact</a>
@@ -18,29 +18,27 @@
         <%= form_tag('/create', method: 'post') do %>
           <%= label_tag(:amount, "Amount: $") %>
           <%= number_field_tag(:amount) %>
-
           <p>
+            <br>
             <label>FROM: </label>
-            <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], "USD") %>
-          </p>
-          <p>
+            <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], "USD"), class: "custom-select custom-select-sm col-4" %>
             <label>TO: </label>
-            <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], "EUR") %>
+            <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], "EUR"), class: "custom-select custom-select-sm col-4" %>
           </p>
 
 
-          <%= submit_tag("Convert", class: "btn btn-lg btn-secondary") %>
+          <%= submit_tag("Convert", class: "btn btn-lg btn-block btn-outline-light") %>
         <% end %>
 
           <br/>
           <label>OUTPUT: <%= @amount %> </label>
-          <h1 className="output"></h1>
+          <h1 class="output"></h1>
         </p>
       </main>
 
       <footer class="mastfoot mt-auto">
         <div class="inner">
-          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+          <p>Application built by <a href="mailto: williammena1991@gmail.com">William Mena</a></p>
         </div>
       </footer>
     </div>
