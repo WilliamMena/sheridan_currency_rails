@@ -17,7 +17,7 @@
 
         <%= form_tag('/create', method: 'post') do %>
           <%= label_tag(:amount, "Amount: $") %>
-          <%= text_field_tag(:amount) %>
+          <%= number_field_tag(:amount) %>
 
           <p>
             <label>FROM: </label>
@@ -33,7 +33,7 @@
         <% end %>
 
           <br/>
-          <label>OUTPUT: </label>
+          <label>OUTPUT: <%= @amount || 0 %> </label>
           <h1 className="output"></h1>
         </p>
       </main>
