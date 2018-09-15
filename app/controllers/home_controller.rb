@@ -13,7 +13,6 @@ class HomeController < ApplicationController
   #
   @@rate = 0
   @@convertedAmount = 0
-  @@conversion = ""
 
   def index
     @amount = @@convertedAmount
@@ -23,7 +22,7 @@ class HomeController < ApplicationController
     amount = params["amount"].to_i
     from = params["currency_from"]
     to = params["currency_to"]
-    @@conversion = from+'_'+to
+    conversion = from+'_'+to
 
     # if Rails.cache.exist?(conversion)
     #   @@rate = Rails.cache.read(conversion)
@@ -37,10 +36,6 @@ class HomeController < ApplicationController
     @@convertedAmount = amount * @@rate
     redirect_to :root
 
-
-  end
-
-  def show
   end
 
   private
