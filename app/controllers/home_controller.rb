@@ -1,16 +1,16 @@
 require 'pry'
-require 'Home.rb'
+
 class HomeController < ApplicationController
 
-  # @rates = {
-  #   "USD_EUR": 0,
-  #   "USD_SGD": 0,
-  #   "EUR_USD": 0,
-  #   "EUR_SGD": 0,
-  #   "SGD_EUR": 0,
-  #   "SGD_USD": 0,
-  # }
-  #
+  @@rates = {
+    "USD_EUR": 0,
+    "USD_SGD": 0,
+    "EUR_USD": 0,
+    "EUR_SGD": 0,
+    "SGD_EUR": 0,
+    "SGD_USD": 0
+  }
+
   @@rate = 0
   @@convertedAmount = 0
 
@@ -24,15 +24,15 @@ class HomeController < ApplicationController
     to = params["currency_to"]
     conversion = from+'_'+to
 
-    # if Rails.cache.exist?(conversion)
-    #   @@rate = Rails.cache.read(conversion)
-    #   print "This was cached"
-    # else
-    #   @@rate = getCurrencyRate(from, to)
-    #   Rails.cache.write(conversion, rate, expires_in: 1.minute)
-    #   print "This is from the API"
-    # end
-    @@rate = getCurrencyRate(from, to)
+    if @@rates[conversion.to_sym] > 0
+      @@rate = @@rates[conversion.to_sym]
+      print "This was cached"
+    else
+      @@rate = getCurrencyRate(from, to)
+      insertRate(conversion, @@rate)
+      # @@rates[conversion.to_sym] = @@rate
+      print "This is from the API"
+    end
     @@convertedAmount = amount * @@rate
     redirect_to :root
 
@@ -45,6 +45,10 @@ class HomeController < ApplicationController
     uri = URI(url)
     response = Net::HTTP.get(uri)
     return JSON.parse(response).first.last["val"]
+  end
+
+  def insertRate(conversion, rate)
+    Thread.new { @@rates[conversion.to_sym] = rate; sleep(10); @@rates[conversion.to_sym] = 0; puts "now reset"}
   end
 
 
