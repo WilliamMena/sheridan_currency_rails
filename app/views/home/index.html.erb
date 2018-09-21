@@ -17,7 +17,7 @@
         <br>
         <%= form_tag('/create', method: 'post') do %>
           <%= label_tag(:amount, "Amount: $") %>
-          <%= number_field_tag(:amount) %>
+          <%= number_field_tag(:amount, @previous_amount, options = {class: "text-center"}) %>
           <br>
             <br>
             <label>FROM: </label>

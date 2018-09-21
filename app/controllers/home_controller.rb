@@ -15,20 +15,25 @@ class HomeController < ApplicationController
   @@convertedAmount = 0
   @@from = "USD"
   @@to = "EUR"
+  @@amount = 0
 
   def index
+    @previous_amount = @@amount
     @amount = @@convertedAmount
     @from = @@from
     @to = @@to
   end
 
   def create
-    amount = params["amount"].to_i
+    @@amount = params["amount"].to_i
     @@from = params["currency_from"]
     @@to = params["currency_to"]
     conversion = @@from+'_'+@@to
 
-    if @@rates[conversion.to_sym] > 0
+
+    if @@from === @@to
+      @@rate = 1
+    elsif @@rates[conversion.to_sym] > 0
       @@rate = @@rates[conversion.to_sym]
       # print "This was cached"
     else
@@ -36,7 +41,7 @@ class HomeController < ApplicationController
       insertRate(conversion, @@rate)
       # print "This is from the API"
     end
-    @@convertedAmount = amount * @@rate
+    @@convertedAmount = @@amount * @@rate
     redirect_to :root
 
   end
