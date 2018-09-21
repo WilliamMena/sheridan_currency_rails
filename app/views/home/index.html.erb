@@ -21,9 +21,9 @@
           <br>
             <br>
             <label>FROM: </label>
-            <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], "USD"), class: "custom-select custom-select-sm col-4" %>
+            <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], @from), class: "custom-select custom-select-sm col-4" %>
             <label>TO: </label>
-            <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], "EUR"), class: "custom-select custom-select-sm col-4" %>
+            <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], @to), class: "custom-select custom-select-sm col-4" %>
           <br>
           <br>
 

@@ -13,25 +13,28 @@ class HomeController < ApplicationController
 
   @@rate = 0
   @@convertedAmount = 0
+  @@from = "USD"
+  @@to = "EUR"
 
   def index
     @amount = @@convertedAmount
+    @from = @@from
+    @to = @@to
   end
 
   def create
     amount = params["amount"].to_i
-    from = params["currency_from"]
-    to = params["currency_to"]
-    conversion = from+'_'+to
+    @@from = params["currency_from"]
+    @@to = params["currency_to"]
+    conversion = @@from+'_'+@@to
 
     if @@rates[conversion.to_sym] > 0
       @@rate = @@rates[conversion.to_sym]
-      print "This was cached"
+      # print "This was cached"
     else
-      @@rate = getCurrencyRate(from, to)
+      @@rate = getCurrencyRate(@@from, @@to)
       insertRate(conversion, @@rate)
-      # @@rates[conversion.to_sym] = @@rate
-      print "This is from the API"
+      # print "This is from the API"
     end
     @@convertedAmount = amount * @@rate
     redirect_to :root
@@ -48,7 +51,7 @@ class HomeController < ApplicationController
   end
 
   def insertRate(conversion, rate)
-    Thread.new { @@rates[conversion.to_sym] = rate; sleep(10); @@rates[conversion.to_sym] = 0; puts "now reset"}
+    Thread.new { @@rates[conversion.to_sym] = rate; sleep(60); @@rates[conversion.to_sym] = 0; puts "now reset"}
   end
 
 
