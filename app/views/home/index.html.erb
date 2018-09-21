@@ -13,18 +13,19 @@
 
       <main role="main" class="inner cover">
         <h1 class="cover-heading">Sheridan Currency.</h1>
-        <p class="lead">
 
+        <br>
         <%= form_tag('/create', method: 'post') do %>
           <%= label_tag(:amount, "Amount: $") %>
           <%= number_field_tag(:amount) %>
-          <p>
+          <br>
             <br>
             <label>FROM: </label>
             <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], "USD"), class: "custom-select custom-select-sm col-4" %>
             <label>TO: </label>
             <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], "EUR"), class: "custom-select custom-select-sm col-4" %>
-          </p>
+          <br>
+          <br>
 
 
           <%= submit_tag("Convert", class: "btn btn-lg btn-block btn-outline-light") %>
@@ -33,7 +34,7 @@
           <br/>
           <label>OUTPUT: <%= @amount %> </label>
           <h1 class="output"></h1>
-        </p>
+
       </main>
 
       <footer class="mastfoot mt-auto">
