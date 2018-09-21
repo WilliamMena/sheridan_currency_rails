@@ -30,6 +30,7 @@ body {
   background-image: url("code_challenge_bg.png");
   background-color: #ffb2cd;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 
 body {

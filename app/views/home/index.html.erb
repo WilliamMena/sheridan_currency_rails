@@ -19,13 +19,16 @@
           <%= label_tag(:amount, "Amount: $") %>
           <%= number_field_tag(:amount, @previous_amount, options = {class: "text-center"}) %>
           <br>
-            <br>
-            <label>FROM: </label>
-            <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], @from), class: "custom-select custom-select-sm col-4" %>
-            <label>TO: </label>
-            <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], @to), class: "custom-select custom-select-sm col-4" %>
           <br>
+            <div class="row justify-content-between">
+                <label>FROM: </label>
+                <%= select_tag "currency_from", options_for_select(["USD", "EUR", "SGD"], @from), class: "custom-select custom-select-sm col-4" %>
+
+                <label>TO: </label>
+                <%= select_tag "currency_to", options_for_select(["USD", "EUR", "SGD"], @to), class: "custom-select custom-select-sm col-4" %>
+            </div>
           <br>
+
 
 
           <%= submit_tag("Convert", class: "btn btn-lg btn-block btn-outline-light") %>
