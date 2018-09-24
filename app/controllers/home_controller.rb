@@ -2,14 +2,7 @@ require 'pry'
 
 class HomeController < ApplicationController
 
-  @@rates = {
-    "USD_EUR": 0,
-    "USD_SGD": 0,
-    "EUR_USD": 0,
-    "EUR_SGD": 0,
-    "SGD_EUR": 0,
-    "SGD_USD": 0
-  }
+  @@cache = ActiveSupport::Cache::MemoryStore.new
 
   @@rate = 0
   @@convertedAmount = 0
@@ -30,16 +23,15 @@ class HomeController < ApplicationController
     @@to = params["currency_to"]
     conversion = @@from+'_'+@@to
 
-
     if @@from === @@to
       @@rate = 1
-    elsif @@rates[conversion.to_sym] > 0
-      @@rate = @@rates[conversion.to_sym]
-      # print "This was cached"
+    elsif @@cache.read(conversion.to_sym)
+      @@rate = @@cache.read(conversion.to_sym)
+      print "This was cached"
     else
       @@rate = getCurrencyRate(@@from, @@to)
-      insertRate(conversion, @@rate)
-      # print "This is from the API"
+      insertRateCache(conversion, @@rate)
+      print "This is from the API"
     end
     @@convertedAmount = @@amount * @@rate
     redirect_to :root
@@ -55,8 +47,8 @@ class HomeController < ApplicationController
     return JSON.parse(response).first.last["val"]
   end
 
-  def insertRate(conversion, rate)
-    Thread.new { @@rates[conversion.to_sym] = rate; sleep(60); @@rates[conversion.to_sym] = 0; puts "now reset"}
+  def insertRateCache(conversion, rate)
+    @@cache.write(conversion, rate, expires_in: 60)
   end
 
 
