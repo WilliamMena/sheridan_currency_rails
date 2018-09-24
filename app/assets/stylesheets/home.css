@@ -92,6 +92,18 @@ body {
   }
 }
 
+@media (max-width: 576px) {
+  html {
+    font-size: .8rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+
 /*
  * Cover
  */
