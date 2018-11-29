@@ -18,13 +18,21 @@ class HomeController < ApplicationController
   @@amount = 0
 
   def index
-    @previous_amount = @@amount
-    @amount = @@convertedAmount
-    @from = @@from
-    @to = @@to
+    if session[:current_user_id]
+      @previous_amount = @@amount
+      @amount = @@convertedAmount
+      @from = @@from
+      @to = @@to
+    else
+      @previous_amount = 0
+      @amount = 0
+      @from = "USD"
+      @to = "EUR"
+    end
   end
 
   def create
+    session[:current_user_id] = 1
     @@amount = params["amount"].to_i
     @@from = params["currency_from"]
     @@to = params["currency_to"]
